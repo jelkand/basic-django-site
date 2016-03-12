@@ -15,7 +15,7 @@ class NewVisitorTest(unittest.TestCase):
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn(row_text, [row.text for row in rows])
 
-    def input_text_into_list_table(self, input_text)
+    def input_text_into_list_table(self, input_text):
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys(input_text)
         inputbox.send_keys(Keys.ENTER)
