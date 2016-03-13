@@ -60,6 +60,3 @@ class NewVisitorTest(LiveServerTestCase):
         user2_list_url = self.browser.current_url
         self.assertRegex(user2_list_url, '/lists/.+')
         self.assertNotEqual(user2_list_url, user1_list_url)
-
-
-        self.fail('Finish test')
