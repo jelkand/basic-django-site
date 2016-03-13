@@ -20,7 +20,6 @@ class HomePageTest(TestCase):
 		self.assertTrue(response.content.strip().endswith(b'</html>'))
 
 
-
 class ListAndItemModelTest(TestCase):
 
 	def test_saving_and_retrieving_items(self):
