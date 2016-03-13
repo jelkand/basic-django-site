@@ -47,6 +47,19 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser.quit()
         self.browser = webdriver.Firefox()
 
+        #Check that previous user's list is not on page
+        self.browser.get(self.live_server_url)
+        page_text = self.browser.find_element_by_tag_name('body').text
+        self.assertNotIn('Buy peacock feathers', page_text)
+
+        #Insert an item and check.
+        self.input_text_into_list_table('Buy milk')
+        self.check_for_row_in_list_table('1: Buy milk')
+
+        #users should have different urls
+        user2_list_url = self.browser.current_url
+        self.assertRegex(user2_list_url, '/lists/.+')
+        self.assertNotEqual(user2_list_url, user1_list_url)
 
 
         self.fail('Finish test')
