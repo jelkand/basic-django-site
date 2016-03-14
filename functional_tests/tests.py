@@ -27,7 +27,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser.get(self.live_server_url)
         self.assertIn('To-Do', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('To-do', header_text)
+        self.assertIn('To-Do', header_text)
 
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertEqual(
