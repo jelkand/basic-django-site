@@ -9,6 +9,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser.implicitly_wait(3)
 
     def tearDown(self):
+        self.browser.refresh()
         self.browser.quit()
 
     def check_for_row_in_list_table(self, row_text):
@@ -44,6 +45,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
 
         ##Test for a second user to ensure user lists are distinct.
+        self.browser.refresh()
         self.browser.quit()
         self.browser = webdriver.Firefox()
 
@@ -60,3 +62,22 @@ class NewVisitorTest(LiveServerTestCase):
         user2_list_url = self.browser.current_url
         self.assertRegex(user2_list_url, '/lists/.+')
         self.assertNotEqual(user2_list_url, user1_list_url)
+
+    def test_layout_and_styling(self):
+        #Check that input box is centered
+        self.browser.get(self.live_server_url)
+        self.browser.set_window_size(1024, 768)
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2,
+            512,
+            delta=10
+        )
+
+        #Check to see if list view is centered as well
+        inputbox.send_keys('testing\n')
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2,
+            512,
+            delta=10
+        )
